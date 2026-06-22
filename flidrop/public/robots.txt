@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://flidrop.onrender.com/sitemap.xml

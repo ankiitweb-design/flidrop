@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<!-- ===================== PRIMARY SEO ===================== -->
+<title>Flidrop — Send Files Between Any Devices, No Upload Needed</title>
+<meta name="description" content="Flidrop lets you send photos, videos, and files directly from iPhone to Android, phone to laptop, or any device to any device. No app install, no account, no upload — files go straight across.">
+<meta name="keywords" content="flidrop, file transfer, send files between devices, phone to laptop, iphone to android, android to pc, share files without cloud, wireless file sharing, p2p file transfer, send video from phone to computer, airdrop alternative all devices">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Flidrop">
+<link rel="canonical" href="https://flidrop.onrender.com/">
+
+<!-- ===================== OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ===================== -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://flidrop.onrender.com/">
+<meta property="og:title" content="Flidrop — Send Files Between Any Devices, No Upload Needed">
+<meta property="og:description" content="Send photos, videos, anything — directly from phone to laptop, iPhone to Android, any device to any device. No app. No account. Files never touch a server.">
+<meta property="og:image" content="https://flidrop.onrender.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Flidrop">
+<meta property="og:locale" content="en_IN">
+
+<!-- ===================== TWITTER CARD ===================== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://flidrop.onrender.com/">
+<meta name="twitter:title" content="Flidrop — Send Files Between Any Devices">
+<meta name="twitter:description" content="Phone to laptop, iPhone to Android — files go straight across with no upload. Free, fast, private.">
+<meta name="twitter:image" content="https://flidrop.onrender.com/og-image.png">
+
+<!-- ===================== STRUCTURED DATA (JSON-LD) ===================== -->
+<!-- This is the main thing Google uses for rich results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Flidrop",
+  "url": "https://flidrop.onrender.com/",
+  "description": "Flidrop transfers files directly between any two devices — phone to laptop, iPhone to Android, Android to PC — using peer-to-peer WebRTC. No app install, no account, no upload to a server.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (runs in any modern browser)",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "INR"
+  },
+  "featureList": [
+    "Send files from iPhone to Android",
+    "Send files from Android to PC or Mac",
+    "Send files from phone to laptop",
+    "No app install required",
+    "No account or login required",
+    "Files never stored on any server",
+    "Peer-to-peer encrypted transfer",
+    "Transfer photos, videos, and large files",
+    "Works across any two devices with a browser"
+  ],
+  "screenshot": "https://flidrop.onrender.com/og-image.png",
+  "creator": {
+    "@type": "Person",
+    "name": "Flidrop"
+  }
+}
+</script>
+
+<!-- ===================== FONTS & STYLES ===================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="wordmark">FLIDROP</div>
+  <div class="server-status" id="serverStatus">
+    <span class="dot" id="serverDot"></span>
+    <span id="serverStatusText">connecting</span>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ============ SCREEN: MODE SELECT ============ -->
+  <section class="screen" id="screen-select" data-screen>
+    <p class="eyebrow">any device&nbsp;→&nbsp;any device</p>
+    <h1 class="hero-line">Send files straight across.<br>No upload. No app. No wait.</h1>
+    <p class="sub">Files travel directly between your two devices — phone to laptop, iPhone to Android, anything to anything. This page never stores or sees them.</p>
+
+    <div class="mode-grid">
+      <button class="mode-card" id="btnSend" type="button">
+        <span class="mode-glyph" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40"><path d="M24 6 L24 30 M14 16 L24 6 L34 16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="34" width="32" height="8" rx="2" stroke="currentColor" stroke-width="3" fill="none"/></svg>
+        </span>
+        <span class="mode-label">Send files</span>
+        <span class="mode-desc">Pick photos, videos, or any file and flidrop them out</span>
+      </button>
+
+      <button class="mode-card" id="btnReceive" type="button">
+        <span class="mode-glyph" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40"><path d="M24 30 L24 6 M14 20 L24 30 L34 20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="34" width="32" height="8" rx="2" stroke="currentColor" stroke-width="3" fill="none"/></svg>
+        </span>
+        <span class="mode-label">Receive files</span>
+        <span class="mode-desc">Enter a code or scan to catch them</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN: SENDER — WAITING / CONNECTED ============ -->
+  <section class="screen" id="screen-send" data-screen hidden>
+    <button class="back-btn" type="button" data-back>← back</button>
+
+    <div class="link-rig">
+      <div class="link-node" id="sendNodeLocal">
+        <svg viewBox="0 0 48 48" width="34" height="34"><rect x="14" y="4" width="20" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="34" r="1.6" fill="currentColor"/></svg>
+        <span>this device</span>
+      </div>
+      <div class="link-line" id="sendLinkLine">
+        <svg viewBox="0 0 200 24" preserveAspectRatio="none" width="100%" height="24">
+          <line x1="0" y1="12" x2="200" y2="12" stroke="currentColor" stroke-width="2" stroke-dasharray="6 6" id="sendLinePath"/>
+        </svg>
+        <span class="link-pulse" id="sendPulse" hidden></span>
+      </div>
+      <div class="link-node" id="sendNodeRemote">
+        <svg viewBox="0 0 48 48" width="34" height="34"><rect x="4" y="12" width="40" height="26" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/><line x1="16" y1="42" x2="32" y2="42" stroke="currentColor" stroke-width="2.5"/></svg>
+        <span id="sendRemoteLabel">other device</span>
+      </div>
+    </div>
+
+    <div id="sendWaitingPanel" class="panel-block">
+      <p class="panel-label">show this on the other device</p>
+      <div class="room-code" id="roomCodeDisplay">·····</div>
+      <div class="qr-wrap">
+        <div id="qrcode"></div>
+      </div>
+      <p class="hint">Open flidrop on the other device and enter the code — or scan the square.</p>
+    </div>
+
+    <div id="sendActivePanel" class="panel-block" hidden>
+      <p class="panel-label connected-label">connected</p>
+      <div class="dropzone" id="dropzone" tabindex="0">
+        <p class="drop-main">Drop files here</p>
+        <p class="drop-sub">or <span class="drop-link" id="browseLink">choose files</span> — photos, videos, anything</p>
+        <input type="file" id="fileInput" multiple hidden>
+      </div>
+      <div class="transfer-list" id="sendTransferList"></div>
+    </div>
+
+    <p class="status-line" id="sendStatusLine"></p>
+  </section>
+
+  <!-- ============ SCREEN: RECEIVER — ENTER CODE ============ -->
+  <section class="screen" id="screen-receive-entry" data-screen hidden>
+    <button class="back-btn" type="button" data-back>← back</button>
+
+    <p class="eyebrow">receive</p>
+    <h2 class="hero-line small">Enter the code shown<br>on the sending device</h2>
+
+    <form class="code-form" id="codeForm" autocomplete="off">
+      <input
+        type="text"
+        id="codeInput"
+        class="code-input"
+        maxlength="5"
+        inputmode="text"
+        autocapitalize="characters"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="·····"
+        aria-label="Flidrop room code">
+      <button type="submit" class="join-btn">Join</button>
+    </form>
+    <p class="status-line" id="receiveEntryStatus"></p>
+  </section>
+
+  <!-- ============ SCREEN: RECEIVER — CONNECTED / INCOMING ============ -->
+  <section class="screen" id="screen-receive-active" data-screen hidden>
+    <div class="link-rig">
+      <div class="link-node" id="recvNodeRemote">
+        <svg viewBox="0 0 48 48" width="34" height="34"><rect x="4" y="12" width="40" height="26" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/><line x1="16" y1="42" x2="32" y2="42" stroke="currentColor" stroke-width="2.5"/></svg>
+        <span>sending device</span>
+      </div>
+      <div class="link-line">
+        <svg viewBox="0 0 200 24" preserveAspectRatio="none" width="100%" height="24">
+          <line x1="0" y1="12" x2="200" y2="12" stroke="currentColor" stroke-width="2" id="recvLinePath"/>
+        </svg>
+        <span class="link-pulse" id="recvPulse" hidden></span>
+      </div>
+      <div class="link-node" id="recvNodeLocal">
+        <svg viewBox="0 0 48 48" width="34" height="34"><rect x="14" y="4" width="20" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="34" r="1.6" fill="currentColor"/></svg>
+        <span>this device</span>
+      </div>
+    </div>
+
+    <p class="panel-label connected-label">connected — waiting for files</p>
+    <div class="transfer-list" id="recvTransferList"></div>
+    <p class="status-line" id="recvStatusLine"></p>
+  </section>
+
+</main>
+
+<!-- ===================== SEO CONTENT BLOCK ===================== -->
+<!-- Visible to Google crawlers, subtle to users in the footer area -->
+<section class="seo-block" aria-label="About Flidrop">
+  <h2>What is Flidrop?</h2>
+  <p>Flidrop is a free web app that transfers files directly between any two devices using your browser — no app to install, no account to create, and nothing ever uploaded to a server. Open Flidrop on both devices, share a 5-letter code, and your photos, videos, or any file travels straight across.</p>
+  <h3>Works between any devices</h3>
+  <p>Send files from iPhone to Android, Android to Windows PC, Mac to iPhone, phone to laptop — any combination works as long as both devices have a browser and are connected to the internet or the same Wi-Fi.</p>
+  <h3>Why is Flidrop fast and private?</h3>
+  <p>Flidrop uses WebRTC, the same peer-to-peer technology behind video calls. Files travel directly from one device to the other without passing through any server. The Flidrop server only helps the two devices find each other — it never sees, stores, or logs your files.</p>
+  <h3>Free, no account needed</h3>
+  <p>Flidrop is completely free. There is no sign-up, no login, and no storage limit. It works on any modern browser — Chrome, Safari, Firefox, Edge — on any device.</p>
+</section>
+
+<footer class="foot">
+  <p>Flidrop — peer-to-peer file transfer. Files are encrypted in transit and never stored on any server.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="vendor/qrcode.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
